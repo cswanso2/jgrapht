@@ -78,4 +78,55 @@ public final class EdmondsBlossomShrinkingTest extends TestCase
         assertTrue(match.contains(e12));
         assertTrue(match.contains(e34));
     }
+    
+    
+    //Written by charles Swanson
+    public void testAllMathced()
+	{
+		 UndirectedGraph<String, DefaultEdge> g =new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
+		 String first = "one";
+		 String second = "two";
+		 String third = "three";
+		 String fourth = "four";
+		 String fifth = "five";
+		 String sixth = "six";
+		 g.addVertex(first);
+		 g.addVertex(second);
+		 g.addVertex(third);
+		 g.addVertex(fourth);
+		 g.addVertex(fifth);
+		 g.addVertex(sixth);
+		 g.addEdge(first, second);
+		 g.addEdge(second, fourth);
+		 g.addEdge(second, third);
+		 g.addEdge(third, fourth);
+		 g.addEdge(second, third);
+		 g.addEdge(fourth, fifth);
+		 g.addEdge(first, fifth);
+		 g.addEdge(sixth, fifth);
+		 EdmondsBlossomShrinking<String, DefaultEdge> matcher = new EdmondsBlossomShrinking<String, DefaultEdge>(g);
+		 Set<DefaultEdge> hold = matcher.getMatching();
+		 assertEquals(3, hold.size() );
+	}
+	
+	//Written by charles Swanson
+    public void testNotAllMatched()
+	{
+		 UndirectedGraph<String, DefaultEdge> g =new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
+		 String first = "one";
+		 String second = "two";
+		 String third = "three";
+		 String fourth = "four";
+		 g.addVertex(first);
+		 g.addVertex(second);
+		 g.addVertex(third);
+		 g.addVertex(fourth);
+		 g.addEdge(first, second);
+		 g.addEdge(second, fourth);
+		 g.addEdge(third, second);
+		 EdmondsBlossomShrinking<String, DefaultEdge> matcher = new EdmondsBlossomShrinking<String, DefaultEdge>(g);
+		 Set<DefaultEdge> hold = matcher.getMatching();
+		 assertEquals(1, hold.size() );
+	}
+	
 }

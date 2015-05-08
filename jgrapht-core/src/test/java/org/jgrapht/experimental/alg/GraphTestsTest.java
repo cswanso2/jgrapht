@@ -140,6 +140,31 @@ public class GraphTestsTest
         g.addEdge(third, fourth);
         assertEquals(false, GraphTests.isComplete(g) );
     }
+    
+    @Test
+    public void isConnected()
+    {
+		UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int first = 1;
+        int second = 2;
+        int third = 3;
+        g.addVertex(first);
+        assertEquals(true, GraphTests.isConnected(g) );
+        g.addVertex(second);
+        assertEquals(false, GraphTests.isConnected(g) );
+      	g.addEdge(first, second);
+      	assertEquals(true, GraphTests.isConnected(g) );
+        g.addVertex(third);
+        g.addEdge(third, second);
+        assertEquals(true, GraphTests.isConnected(g) );
+        g.addEdge(first, third);
+        int fourth = 4;
+        g.addVertex(fourth);
+        assertEquals(false, GraphTests.isConnected(g) );
+        g.addEdge(third, fourth);
+        assertEquals(true, GraphTests.isConnected(g) );
+    }
+    
 
 	private static class IntegerVertexFactory
         implements VertexFactory<Integer>

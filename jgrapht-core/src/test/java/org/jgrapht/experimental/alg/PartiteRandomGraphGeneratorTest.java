@@ -44,6 +44,7 @@ import org.junit.Test;
 import org.jgrapht.event.*;
 import org.jgrapht.graph.builder.*;
 import org.jgrapht.experimental.*;
+import org.jgrapht.alg.*;
 
 /**
  * A unit test for directed multigraph.
@@ -64,7 +65,7 @@ public class PartiteRandomGraphGeneratorTest
  	*/
 
  	@Test
-    public void testGenerateGraph()
+    public void testBipartiteGraph()
     {
     	
         UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
@@ -76,10 +77,61 @@ public class PartiteRandomGraphGeneratorTest
         // test vertex notification
         assertEquals(edges, g.edgeSet().size());
         assertEquals(leftVertices + rightVertices, g.vertexSet().size());
-        Set<Integer> first = new HashSet<Integer>();
-        Set<Integer> second = new HashSet<Integer>();
+        assertEquals(2, ChromaticNumber.findGreedyChromaticNumber(g) );
     }
 
+	@Test (expected = IllegalArgumentException.class)
+    public void testNegativeVertices()
+    {
+    	UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int leftVertices = -1;
+        int rightVertices = 5;
+        int edges = 6;
+		PartiteRandomGraphGenerator<Integer, DefaultEdge> gen = new PartiteRandomGraphGenerator<Integer, DefaultEdge>(leftVertices, rightVertices, edges);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void moreEdgesThanVertices()
+    {
+    	UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int leftVertices = 5;
+        int rightVertices = 5;
+        int edges = 26;
+		PartiteRandomGraphGenerator<Integer, DefaultEdge> gen = new PartiteRandomGraphGenerator<Integer, DefaultEdge>(leftVertices, rightVertices, edges);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void testNegativeVerticesArray()
+    {
+    	UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int[] vertices = {1, -1};
+        int edges = 1;
+		PartiteRandomGraphGenerator<Integer, DefaultEdge> gen = new PartiteRandomGraphGenerator<Integer, DefaultEdge>(vertices, edges);
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void moreEdgesThanVerticesArray()
+    {
+    	UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int[] vertices = {5,5};
+        int edges = 26;
+		PartiteRandomGraphGenerator<Integer, DefaultEdge> gen = new PartiteRandomGraphGenerator<Integer, DefaultEdge>(vertices, edges);
+    }
+    
+    @Test
+    public void triPartiteGraph()
+    {
+    	UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int[] vertices = {3,3,3};
+        int edges = 6;
+		PartiteRandomGraphGenerator<Integer, DefaultEdge> gen = new PartiteRandomGraphGenerator<Integer, DefaultEdge>(vertices, edges);
+		Map<String, Object[]> mapper = new HashMap<String, Object[]>();
+		gen.generateGraph(g, new IntegerVertexFactory(), mapper);
+		assertEquals(edges * vertices.length, g.edgeSet().size());
+        assertEquals(9, g.vertexSet().size());
+        assertEquals(3, ChromaticNumber.findGreedyChromaticNumber(g) );
+    }
+    
 
 	private static class IntegerVertexFactory
         implements VertexFactory<Integer>

@@ -63,7 +63,7 @@ public class GraphTestsTest
  	* @author Charles Swanson
  	* @since May 5th, 2015
  	*/
-
+	//tests GraphTests.isEmpty
  	@Test
     public void testIsEmpty()
     {
@@ -75,6 +75,7 @@ public class GraphTestsTest
         assertEquals(false, GraphTests.isEmpty(g) );
     }
     
+    //tests GraphTests.isConnected
     @Test
     public void testIsConnected()
     {
@@ -94,11 +95,13 @@ public class GraphTestsTest
         assertEquals(true, GraphTests.isComplete(g) );
     }
     
+    //tests GraphTests.isBipartite
     @Test
     public void isBipartite()
     {
     	//generate graph using PartiteGraph Generator than test if bipartite
         UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        assertEquals(true, GraphTests.isBipartite(g));
         int leftVertices = 4;
         int rightVertices = 5;
         int edges = 6;
@@ -119,6 +122,7 @@ public class GraphTestsTest
         assertEquals(false, GraphTests.isBipartite(h) );
     }
 
+	//tests GraphTests.isComplete
 	@Test
     public void isComplete()
     {
@@ -141,6 +145,7 @@ public class GraphTestsTest
         assertEquals(false, GraphTests.isComplete(g) );
     }
     
+    //tests GraphTests.isConnected
     @Test
     public void isConnected()
     {

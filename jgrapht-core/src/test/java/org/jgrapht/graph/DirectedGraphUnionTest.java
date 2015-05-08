@@ -155,6 +155,10 @@ public class DirectedGraphUnionTest
         edgeSet = g.incomingEdgesOf(vertex1);
 
         assertEquals(edgeSet.size(),2);
+
+        edgeSet = g.incomingEdgesOf(vertex4);
+
+        assertEquals(edgeSet.size(),0);
     }
 
     //Test outgoingEdgesOf
@@ -188,6 +192,10 @@ public class DirectedGraphUnionTest
         edgeSet = g.outgoingEdgesOf(vertex1);
 
         assertEquals(edgeSet.size(),2);
+
+        edgeSet = g.outgoingEdgesOf(vertex4);
+
+        assertEquals(edgeSet.size(),0);
     }
     
 }

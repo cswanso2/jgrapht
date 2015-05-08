@@ -49,8 +49,11 @@ public class UndirectedGraphUnion<V, E>
 
     private static final long serialVersionUID = -740199233080172450L;
 
-    
-
+ //BUG: Original staments require a UndirectedGraphUnion to be the second parameter
+ // Can not make UndirectedGraphUnion without an UndirectedGraphUnion
+ // Changed the second parameter to simply an Undirected Graph
+ // Similar to what is done in DirectedGraphUnion.java   
+/*
     UndirectedGraphUnion(
         UndirectedGraph<V, E> g1,
         UndirectedGraphUnion<V, E> g2,
@@ -62,6 +65,22 @@ public class UndirectedGraphUnion<V, E>
     UndirectedGraphUnion(
         UndirectedGraph<V, E> g1,
         UndirectedGraphUnion<V, E> g2)
+    {
+        super(g1, g2);
+    }
+*/
+
+UndirectedGraphUnion(
+        UndirectedGraph<V, E> g1,
+        UndirectedGraph<V, E> g2,
+        WeightCombiner operator)
+    {
+        super(g1, g2, operator);
+    }
+
+    UndirectedGraphUnion(
+        UndirectedGraph<V, E> g1,
+        UndirectedGraph<V, E> g2)
     {
         super(g1, g2);
     }

@@ -29,7 +29,7 @@ public final class GraphTests<V, E>
 
     public static <V, E> boolean isEmpty(Graph<V, E> g)
     {
-        return g.edgeSet().isEmpty();
+        return g.edgeSet().isEmpty() && g.vertexSet().isEmpty();
     }
 
     public static <V, E> boolean isComplete(Graph<V, E> g)

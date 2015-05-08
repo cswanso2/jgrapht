@@ -1,4 +1,4 @@
-/* ==========================================
+ /*==========================================
  * JGraphT : a free Java graph-theory library
  * ==========================================
  *
@@ -46,6 +46,8 @@ import org.jgrapht.experimental.dag.DirectedAcyclicGraph.CycleFoundException;
 import org.jgrapht.generate.*;
 import org.jgrapht.graph.*;
 import org.jgrapht.traverse.*;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -223,6 +225,7 @@ public class DirectedAcyclicGraphTest
      /**
      *tests adding vertex made my charles swannson.
      */
+    
     public void testAddVertex()
     {
             DirectedAcyclicGraph<Long, DefaultEdge> dag = new DirectedAcyclicGraph<Long, DefaultEdge>(DefaultEdge.class);
@@ -233,6 +236,30 @@ public class DirectedAcyclicGraphTest
             dag.addVertex(first, false);
             dag.addVertex(first);
     }
+
+	/**
+     *tests adding vertexEdge made my charles swannson.
+     */
+    public void addDagEdge()
+    {
+            DirectedAcyclicGraph<Long, String> dag = new DirectedAcyclicGraph<Long, String>(String.class);
+            long first = 4;
+            long second = 3;
+            long third = 2;
+            dag.addVertex(first, true);
+            dag.addVertex(second, true);
+            dag.addVertex(third, true);
+            try
+            {
+            	assertEquals(true, dag.addDagEdge(third, first, "4-2"));
+            }
+            catch(CycleFoundException e)
+            {
+            	fail("Exception even with no cycle");
+            }
+
+    }
+    
 
     public void testIterationBehaviors()
     {
@@ -632,3 +659,5 @@ public class DirectedAcyclicGraphTest
 }
 
 // End DirectedAcyclicGraphTest.java
+
+

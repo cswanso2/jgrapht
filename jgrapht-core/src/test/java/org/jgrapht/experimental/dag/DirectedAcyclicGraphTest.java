@@ -181,6 +181,9 @@ public class DirectedAcyclicGraphTest
         }
     }
 
+
+
+
     /**
      * more rigorous test of topological iteration order, by assuring that each
      * visited vertex adheres to the definition of topological order, that is
@@ -215,6 +218,20 @@ public class DirectedAcyclicGraphTest
                 previousVertices.add(vertex);
             }
         }
+    }
+    
+     /**
+     *tests adding vertex made my charles swannson.
+     */
+    public void testAddVertex()
+    {
+            DirectedAcyclicGraph<Long, DefaultEdge> dag = new DirectedAcyclicGraph<Long, DefaultEdge>(DefaultEdge.class);
+            long first = 4;
+            long second = 3;
+            dag.addVertex(first, false);
+            dag.addVertex(second, true);
+            dag.addVertex(first, false);
+            dag.addVertex(first);
     }
 
     public void testIterationBehaviors()

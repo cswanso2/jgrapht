@@ -117,7 +117,28 @@ public class GraphTestsTest
         h.addEdge(third, second);
         h.addEdge(first, third);
         assertEquals(false, GraphTests.isBipartite(h) );
-		
+    }
+
+	@Test
+    public void isComplete()
+    {
+		UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int first = 1;
+        int second = 2;
+        int third = 3;
+        g.addVertex(first);
+        assertEquals(true, GraphTests.isComplete(g) );
+        g.addVertex(second);
+        assertEquals(false, GraphTests.isComplete(g) );
+      	g.addEdge(first, second);
+      	assertEquals(true, GraphTests.isComplete(g) );
+        g.addVertex(third);
+        g.addEdge(third, second);
+        g.addEdge(first, third);
+        int fourth = 4;
+        g.addVertex(fourth);
+        g.addEdge(third, fourth);
+        assertEquals(false, GraphTests.isComplete(g) );
     }
 
 	private static class IntegerVertexFactory

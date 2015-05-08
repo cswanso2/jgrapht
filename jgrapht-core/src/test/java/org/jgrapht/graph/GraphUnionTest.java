@@ -29,6 +29,15 @@ public class GraphUnionTest
     	Graph<String, Integer> test = new GraphUnion(null, null, WeightCombiner.SUM);
     }
 
+    //Test GraphUnion Null Two
+    @Test (expected = NullPointerException.class)
+    public void testGraphUnionNullTwo()
+    {
+        Graph<String, Integer> one = new SimpleGraph<String, Integer>(Integer.class);
+
+        Graph<String, Integer> test = new GraphUnion(one, null, WeightCombiner.SUM);
+    }
+
     //Test GraphUnion Equal
 	@Test (expected = IllegalArgumentException.class)
     public void testGraphUnionEqual()
@@ -640,7 +649,6 @@ public class GraphUnionTest
         first.addEdge(vertex2, vertex1, one);
         first.addEdge(vertex3, vertex1, two);
         second.addEdge(vertex4, vertex5, three);
-        second.addEdge(vertex3, vertex1, two);
 
     	Graph<String, Integer> test = new GraphUnion(first, second, WeightCombiner.SUM);
 

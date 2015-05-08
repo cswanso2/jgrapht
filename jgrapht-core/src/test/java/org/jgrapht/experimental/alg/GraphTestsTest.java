@@ -58,7 +58,7 @@ public class GraphTestsTest
     //~ Methods ----------------------------------------------------------------
 
     /**
- 	* A TestSuite for the partite random graph generator
+ 	* A TestSuite for the graph Tests
  	*
  	* @author Charles Swanson
  	* @since May 5th, 2015
@@ -93,6 +93,32 @@ public class GraphTestsTest
         g.addEdge(first, third);
         assertEquals(true, GraphTests.isComplete(g) );
     }
+    
+    @Test
+    public void isBipartite()
+    {
+    	//generate graph using PartiteGraph Generator than test if bipartite
+        UndirectedGraph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int leftVertices = 4;
+        int rightVertices = 5;
+        int edges = 6;
+		PartiteRandomGraphGenerator<Integer, DefaultEdge> gen = new PartiteRandomGraphGenerator<Integer, DefaultEdge>(leftVertices, rightVertices, edges);
+		gen.generateGraph(g, new IntegerVertexFactory(), null);
+		assertEquals(true, GraphTests.isBipartite(g) );
+		//make non bipartite graph
+		UndirectedGraph<Integer, DefaultEdge> h = new SimpleGraph<Integer, DefaultEdge>(DefaultEdge.class);
+        int first = 1;
+        int second = 2;
+        int third = 3;
+        h.addVertex(first);
+        h.addVertex(second);
+        h.addVertex(third);
+        h.addEdge(first, second);
+        h.addEdge(third, second);
+        h.addEdge(first, third);
+        assertEquals(false, GraphTests.isBipartite(h) );
+		
+    }
 
 	private static class IntegerVertexFactory
         implements VertexFactory<Integer>
@@ -105,6 +131,8 @@ public class GraphTestsTest
             return nextVertex++;
         }
     }
+    
+    
 }
 
 // End DefaultDirectedGraphTest.java

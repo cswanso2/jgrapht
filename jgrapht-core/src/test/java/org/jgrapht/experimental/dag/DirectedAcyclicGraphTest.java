@@ -231,10 +231,34 @@ public class DirectedAcyclicGraphTest
             DirectedAcyclicGraph<Long, DefaultEdge> dag = new DirectedAcyclicGraph<Long, DefaultEdge>(DefaultEdge.class);
             long first = 4;
             long second = 3;
+            assertEquals(true, dag.addVertex(first, false) );
+            assertEquals(true, dag.addVertex(second, true) );
+            assertEquals(false, dag.addVertex(first, false));
+            dag.addVertex(first);
+    }
+    
+    /**
+     *tests removing vertex made my charles swannson.
+     */
+    
+    public void testRemoveVertex()
+    {
+            DirectedAcyclicGraph<Integer, DefaultEdge> dag = new DirectedAcyclicGraph<Integer, DefaultEdge>(DefaultEdge.class);
+            int first = 1;
+            int second = 2;
+            int third = 3;
+            int fourth = 4;
             dag.addVertex(first, false);
             dag.addVertex(second, true);
-            dag.addVertex(first, false);
-            dag.addVertex(first);
+            dag.addVertex(third, false);
+            dag.addVertex(fourth, false);
+            assertEquals(true, dag.removeVertex(first) );
+            assertEquals(false, dag.removeVertex(first) );
+            assertEquals(true, dag.removeVertex(fourth) );
+            List<Integer> collection = new LinkedList<Integer>();
+            collection.add(second);
+            collection.add(third);
+            assertEquals(true, dag.removeAllVertices(collection) );
     }
 
 	/**

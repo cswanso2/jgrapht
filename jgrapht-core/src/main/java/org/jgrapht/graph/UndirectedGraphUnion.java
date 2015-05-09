@@ -49,6 +49,7 @@ public class UndirectedGraphUnion<V, E>
 
     private static final long serialVersionUID = -740199233080172450L;
 
+ // Edited by Brandon Holland
  //BUG: Original staments require a UndirectedGraphUnion to be the second parameter
  // Can not make UndirectedGraphUnion without an UndirectedGraphUnion
  // Changed the second parameter to simply an Undirected Graph

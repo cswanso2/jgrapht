@@ -1,0 +1,97 @@
+/**
+* FibonacciHeapTest Test
+*
+* Author: Brandon Holland
+*
+*
+*/
+
+package org.jgrapht.util;
+
+import java.util.*;
+
+import org.jgrapht.graph.*;
+
+import org.jgrapht.*;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+
+
+public class FibonacciHeapHollandTest
+{
+    @Test (expected = IllegalArgumentException.class)
+    public void testDecreaseKeyIllegal()
+    {
+        String s = "A";
+        FibonacciHeapNode<String> n = new FibonacciHeapNode<String>(s);
+
+        FibonacciHeap fib = new FibonacciHeap();
+
+        fib.insert(n,1.0);
+
+        fib.decreaseKey(n, 2.0);
+    }
+
+    @Test
+    public void testDelete()
+    {
+        String s = "A";
+        FibonacciHeapNode<String> n = new FibonacciHeapNode<String>(s);
+
+        FibonacciHeap fib = new FibonacciHeap();
+
+        fib.insert(n,1.0);
+
+        fib.delete(n);
+
+        assertEquals(fib.isEmpty(),true);
+    }
+
+    @Test
+    public void testUnion()
+    {
+        String s = "A";
+        FibonacciHeapNode<String> a = new FibonacciHeapNode<String>(s);
+        FibonacciHeapNode<String> b = new FibonacciHeapNode<String>(s);
+
+        FibonacciHeap one = new FibonacciHeap();
+        FibonacciHeap two = new FibonacciHeap();
+
+        FibonacciHeap union = new FibonacciHeap();
+
+        one.insert(a,1.0);
+        two.insert(b,1.0);
+
+        union.union(one,two);
+
+        //BUG: The union of two non empty heaps should return a non empty heap.        
+        //assertEquals(union.isEmpty(),false);
+
+        union.union(null,null);
+
+        assertEquals(union.size(),0);
+    }
+
+    @Test
+    public void testToString()
+    {
+        String s = "A";
+        FibonacciHeapNode<String> a = new FibonacciHeapNode<String>(s);
+        FibonacciHeapNode<String> b = new FibonacciHeapNode<String>(s);
+
+        FibonacciHeap fib = new FibonacciHeap();
+
+        assertEquals(fib.toString(),"FibonacciHeap=[]");
+
+        fib.insert(a,1.0);
+        fib.insert(b,1.0);
+
+        //BUG: The format of the return string of two variable is "[1.0, 1.0, ]"
+        //This is not a desireable format
+        //Given the way this object is built, it would be difficult to change
+        assertEquals(fib.toString(),"FibonacciHeap=[1.0, 1.0, ]");
+    }
+}

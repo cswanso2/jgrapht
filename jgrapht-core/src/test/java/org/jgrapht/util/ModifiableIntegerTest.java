@@ -124,7 +124,7 @@ public class ModifiableIntegerTest
 
 	// Test doubleValue
 	@Test
-	public void testToInteger()
+	public void testDoubleValue()
 	{
 		int one = 1;		
 

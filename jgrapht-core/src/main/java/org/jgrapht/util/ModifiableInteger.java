@@ -164,9 +164,9 @@ public class ModifiableInteger
         //Edited by Brandon Holland
         //BUG: From documentation, supposed to return +1 if anotherInteger is greater than testing ModifiableInteger
         //Return -1 if anotherInteger is less than testing ModifiableInteger
-        //return (thisVal < anotherVal) ? -1 : ((thisVal == anotherVal) ? 0 : 1);
+        return (thisVal < anotherVal) ? -1 : ((thisVal == anotherVal) ? 0 : 1);
 
-        return (thisVal < anotherVal) ? 1 : ((thisVal == anotherVal) ? 0 : -1);
+        //return (thisVal < anotherVal) ? 1 : ((thisVal == anotherVal) ? 0 : -1);
     }
 
     /**

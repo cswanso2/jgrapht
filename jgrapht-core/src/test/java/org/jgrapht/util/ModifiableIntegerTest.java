@@ -122,17 +122,6 @@ public class ModifiableIntegerTest
 		assertEquals(test, one);
 	}
 
-	// Test doubleValue
-	@Test
-	public void testDoubleValue()
-	{
-		int one = 1;		
-
-		ModifiableInteger mod = new ModifiableInteger(one);
-
-		assertEquals(mod.doubleValue(), 1.0);
-	}
-
 	// Test toString
 	@Test
 	public void testToString()
